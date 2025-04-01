@@ -20,13 +20,13 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, formAction }) => {
                 <form className="flex flex-col space-y-4 mb-4 min-w-[300px]">
                     <div className="flex flex-col">
                         <label htmlFor="email">Email:</label>
-                        <input id="email" name="email" type="email" required className="border p-2 rounded " />
+                        <input id="email" name="email" type="email" required className="border p-2 rounded focus:outline-2 focus:outline-offset-2 focus:outline-sky-100 active:bg-sky-700 " />
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="password">Password:</label>
-                        <input id="password" name="password" type="password" required className="border p-2 rounded" />
+                        <input id="password" name="password" type="password" required className="border p-2 rounded focus:outline-2 focus:outline-offset-2 focus:outline-sky-100 active:bg-sky-700" />
                     </div>
-                    <button type="submit" formAction={formAction} className="bg-blue-500 text-white p-2 rounded">
+                    <button type="submit" formAction={formAction} className="bg-blue-500 text-white p-2 rounded ">
                         {title}
                     </button>
                 </form>
@@ -38,6 +38,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, formAction }) => {
                 {(title.toLowerCase() == "sign up") &&
                     <p>Already have an Account? <b> <a onClick={() => router.push('/auth/login')} className='cursor-pointer'>Login here</a> </b></p>
                 }
+
+                <a onClick={()=>router.push('/about/privacy')} className='cursor-pointer mt-5'>Privacy Policy</a>
             </div>
         </div>
     );
