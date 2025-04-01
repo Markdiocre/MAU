@@ -6,5 +6,10 @@ export async function POST() {
 
   const {error} = await supabase.auth.signOut();
 
-  return NextResponse.redirect("/"); // Redirect to home or login page
+  return NextResponse.json({
+    message: "Success"
+  }, {
+    status: 200
+  })
+
 }

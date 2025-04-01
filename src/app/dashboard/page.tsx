@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { requestHandler } from "@/app/utils/requestHandler";
+import { useRouter } from "next/navigation";
 import "./page.css"
 
 
@@ -11,6 +12,8 @@ export default function Dashboard() {
     const [budget, setBudget] = useState('')
     const [people, setPeople] = useState('')
     const [requests, setRequests] = useState('')
+
+    const router = useRouter()
 
     function handlePromptSubmit(e: any){
         e.preventDefault()
@@ -23,6 +26,15 @@ export default function Dashboard() {
             }
         }).then((res)=>{
             console.log(res.data.output)
+        })
+    }
+
+    async function handleLogout(){
+        await requestHandler({
+            url: '/auth/logout',
+            method: 'POST',
+        }).then((res)=>{
+            router.push('/')
         })
     }
 
@@ -48,7 +60,7 @@ export default function Dashboard() {
                 <button type="submit">Submit</button>
             </form>
 
-            
+            <button onClick={handleLogout}>Logout</button>
         </div>
     );
 }
