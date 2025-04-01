@@ -6,5 +6,5 @@ import AuthForm from '@/components/AuthForm'
 export default function Login() {
 
 
-  return <AuthForm title='SIGN UP' formAction={login} />
+  return <AuthForm title='LOGIN' formAction={login} />
 }
