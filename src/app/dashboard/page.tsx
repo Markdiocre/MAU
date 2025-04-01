@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { requestHandler } from "@/utility/requestHandler";
+import { requestHandler } from "@/app/utils/requestHandler";
 import "./page.css"
 
 
