@@ -24,7 +24,7 @@ const Prompt: React.FC<PromptInterface> = ({ setActive, loading, prompt }) => {
                 dangerouslySetInnerHTML={{ __html: prompt }}
             />
 
-            <button type="button" className="w-full text-white font-bold bg-green-700 hover:bg-green-950  p-4 mt-6 cursor-pointer " onClick={e => setActive(false)}>CLOSE</button>
+            <button type="button" className="w-full text-white font-bold bg-green-700 hover:bg-green-950  p-4 mt-6 cursor-pointer " onClick={() => setActive(false)}>CLOSE</button>
 
         </div>}
     </>)

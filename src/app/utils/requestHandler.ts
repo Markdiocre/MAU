@@ -3,7 +3,7 @@ import axios from "axios"
 interface IRequest{
     method: "POST" | "GET" | "PUT" | "DELETE",
     url : string,
-    body?: any
+    body?: object
 }
 
 const DEPLOY = true

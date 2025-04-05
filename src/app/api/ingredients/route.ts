@@ -18,7 +18,7 @@ export async function POST(req: NextRequest){
     const endOfToday = new Date()
     endOfToday.setHours(23, 59, 59, 999)
 
-    let { count, error } = await supabase
+    const { count, error } = await supabase
     .from('recipes')
     .select("*", {count: 'exact', head : true})
     .gte('created_at', startOfToday.toISOString())

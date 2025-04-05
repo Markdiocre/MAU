@@ -29,7 +29,7 @@ async function generatePrompt(data: currentIngredients) {
         Lastly, ensure that the markdown output looks good when parsed into HTML—focus on making it clean,easy to read, and add new lines when possible. Do not add additional comments. Limit it on the sections mentioned above.
     `
 
-    var prompt = `
+    const prompt = `
         What ingredients I currently have: ${data.currentIngredients || "I can buy any ingredients in my local market"}
         Type of food i want to cook: ${data.mood || "Not craving for anything particular, Anything is okay"}
         My budget at the meantime: ${data.budget || "Doesn't matter how much"}

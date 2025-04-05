@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { requestHandler } from "@/app/utils/requestHandler";
 import { useRouter } from "next/navigation";
 import MarkdownIt from 'markdown-it';
@@ -48,7 +48,7 @@ export default function Dashboard() {
             .join(', ');
     };
 
-    const handlePromptSubmit = (e: any) => {
+    const handlePromptSubmit = (e : ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setActive(true)
         setLoading(true)
@@ -83,7 +83,7 @@ export default function Dashboard() {
         await requestHandler({
             url: '/auth/logout',
             method: 'POST',
-        }).then((res) => {
+        }).then(() => {
             router.push('/')
         }).catch((err)=>{
             console.log(err)
@@ -100,9 +100,9 @@ export default function Dashboard() {
                 {!active &&
                     <>
                     <nav className="fixed w-full flex justify-end px-3 sm:py-5 py-2">
-                        <a onClick={e => handleLogout()} className="cursor-pointer font-bold px-5 py-2 auth">LOGOUT</a>
+                        <a onClick={() => handleLogout()} className="cursor-pointer font-bold px-5 py-2 auth">LOGOUT</a>
                     </nav>
-                    <form onSubmit={handlePromptSubmit} className="sm:max-w-[640px] w-full px-4 my-10">
+                    <form onSubmit={() => handlePromptSubmit} className="sm:max-w-[640px] w-full px-4 my-10">
                         <p className="font-bold text-lg text-left">Anong ingredients meron ka ngayon? Pakilista</p>
                         <p className="text-sm text-left">(What ingredients do you have right now? List Them.)</p>
 
@@ -118,7 +118,7 @@ export default function Dashboard() {
                                         className={items.length === 1 ? "border-green-700 border-2 p-2 w-full focus:border-4" : "border-green-700 border-2 p-2 w-[75%] focus:border-4"}
                                     />
                                     {index !== 0 &&
-                                        <button type="button" onClick={e => handleItemDelete(index)} className="bg-red-500 p-2 ml-2 cursor-pointer hover:bg-amber-500">Delete</button>
+                                        <button type="button" onClick={() => handleItemDelete(index)} className="bg-red-500 p-2 ml-2 cursor-pointer hover:bg-amber-500">Delete</button>
                                     }
 
                                 </div>
@@ -131,15 +131,15 @@ export default function Dashboard() {
 
 
                         <p className="font-bold text-lg mt-4">Ilan ang budget mo ngayon?</p>
-                        <p className="text-sm text-left">(What's your budget right now?)</p>
+                        <p className="text-sm text-left">(What is your budget right now?)</p>
                         <input type="number" onChange={e => setBudget(e.target.value)} className="border-green-700 border-2 mt-4 p-2 w-full focus:border-4" placeholder="Type your budget..." />
 
                         <p className="font-bold text-lg mt-4"> Para sa ilang tao ka magluluto?</p>
                         <p className="text-sm text-left">(For how many people would you cook for?)</p>
                         <input type="number" onChange={e => setPeople(e.target.value)} className="border-green-700 border-2 mt-4 p-2 w-full focus:border-4" placeholder="Type the number of people .." />
 
-                        <p className="font-bold text-lg mt-4">May additional ka bang request? ("Wala kaming kalan", "Madali lang lutuin", etc)</p>
-                        <p className="text-sm text-left">(Do you have additional requests? ("We dont have a stove", "Easy to cook", etc))</p>
+                        <p className="font-bold text-lg mt-4">May additional ka bang request? (Wala kaming kalan, Madali lang lutuin, etc)</p>
+                        <p className="text-sm text-left">(Do you have additional requests? (We dont have a stove, Easy to cook, etc))</p>
                         <input type="text" onChange={e => setRequests(e.target.value)} className="border-green-700 border-2 mt-4 p-2 w-full focus:border-4" placeholder="Type your requests..." /><br />
 
                         <button type="submit" className="bg-green-400 w-full mt-6 cursor-pointer hover:bg-green-700 hover:text-white p-4 " >Generate Recipe</button>

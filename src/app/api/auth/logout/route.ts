@@ -6,6 +6,14 @@ export async function POST() {
 
   const {error} = await supabase.auth.signOut();
 
+  if(error){
+    return NextResponse.json({
+      message: "Server encountered an error"
+    }, {
+      status: 500
+    })
+  }
+
   return NextResponse.json({
     message: "Success"
   }, {
