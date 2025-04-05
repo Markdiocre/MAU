@@ -85,6 +85,8 @@ export default function Dashboard() {
             method: 'POST',
         }).then((res) => {
             router.push('/')
+        }).catch((err)=>{
+            console.log(err)
         })
     }
 
