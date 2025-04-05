@@ -1,0 +1,12 @@
+.title{
+    color: var(--primary);
+}
+
+.button{
+    background-color: var(--primary);
+    color: var(--text-color);
+}
+
+.button:hover{
+    background-color: var(--accent);
+}
