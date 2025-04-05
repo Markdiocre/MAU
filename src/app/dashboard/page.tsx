@@ -96,7 +96,10 @@ export default function Dashboard() {
                     <Prompt loading={loading} setActive={setActive} prompt={output} />
                 }
                 {!active &&
-
+                    <>
+                    <nav className="fixed w-full flex justify-end px-3 sm:py-5 py-2">
+                        <a onClick={e => handleLogout()} className="cursor-pointer font-bold px-5 py-2 auth">LOGOUT</a>
+                    </nav>
                     <form onSubmit={handlePromptSubmit} className="sm:max-w-[640px] w-full px-4 my-10">
                         <p className="font-bold text-lg text-left">Anong ingredients meron ka ngayon? Pakilista</p>
                         <p className="text-sm text-left">(What ingredients do you have right now? List Them.)</p>
@@ -139,6 +142,7 @@ export default function Dashboard() {
 
                         <button type="submit" className="bg-green-400 w-full mt-6 cursor-pointer hover:bg-green-700 hover:text-white p-4 " >Generate Recipe</button>
                     </form>
+                    </>
                 }
             </div>
         </>
