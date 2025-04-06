@@ -1,6 +1,6 @@
 "use client"
 
-import { ChangeEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { requestHandler } from "@/app/utils/requestHandler";
 import { useRouter } from "next/navigation";
 import MarkdownIt from 'markdown-it';
@@ -48,8 +48,10 @@ export default function Dashboard() {
             .join(', ');
     };
 
-    const handlePromptSubmit = (e : ChangeEvent<HTMLInputElement>) => {
+    const handlePromptSubmit = (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        console.log("Running")
+
         setActive(true)
         setLoading(true)
         setOutput('')
@@ -89,20 +91,18 @@ export default function Dashboard() {
             console.log(err)
         })
     }
-
     return (
         <>
-
             <div className="flex justify-center h-full min-h-screen ">
                 {active &&
                     <Prompt loading={loading} setActive={setActive} prompt={output} />
                 }
                 {!active &&
                     <>
-                    <nav className="fixed w-full flex justify-end px-3 sm:py-5 py-2">
-                        <a onClick={() => handleLogout()} className="cursor-pointer font-bold px-5 py-2 auth">LOGOUT</a>
+                    <nav className="fixed w-full flex justify-end px-3 sm:py-5 py-2 ">
+                        <button type="button" onClick={() => handleLogout()} className="cursor-pointer font-bold px-5 py-2 bg-green-500">LOGOUT</button>
                     </nav>
-                    <form onSubmit={() => handlePromptSubmit} className="sm:max-w-[640px] w-full px-4 my-10">
+                    <form onSubmit={(e) => handlePromptSubmit(e)} className="sm:max-w-[640px] w-full px-4 my-10">
                         <p className="font-bold text-lg text-left">Anong ingredients meron ka ngayon? Pakilista</p>
                         <p className="text-sm text-left">(What ingredients do you have right now? List Them.)</p>
 

@@ -7,14 +7,11 @@ interface PromptInterface {
 }
 
 const Prompt: React.FC<PromptInterface> = ({ setActive, loading, prompt }) => {
-
-
-
     return (<>
 
         {loading && <div className="flex items-center justify-center gap-2 border sm:w-[650px] w-full bg-amber-200 p-2 my-10">
             <div className="w-5 h-5 border-2 border-white border-t-blue-500 rounded-full animate-spin"></div>
-            <span className="text-gray-700">Loading  Recipe...</span>
+            <span className="text-gray-700"> Finding Recipe...</span>
         </div>}
 
         {!loading && <div className="border sm:w-[650px] w-full bg-amber-200 p-2 my-10 mx-4">
