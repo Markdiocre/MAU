@@ -1,13 +1,14 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-
 import { createClient } from '@/utils/supabase/server'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 
 const userSchema = z.object({
-    email: z.string().email('Invalid email address'),
-    password: z.string().min(8, 'Password must be at least 8 characters long'),
+    email: z.string({
+        required_error: "Email must be provided"
+    }).email('Invalid email address'),
+    password: z.string({
+        required_error: "Password must be provided"
+    }),
 });
 
 export async function POST(request: NextRequest) {
@@ -19,21 +20,31 @@ export async function POST(request: NextRequest) {
             email, password
         })
 
-
         const { error } = await supabase.auth.signInWithPassword({
             email: cleanData.email,
             password: cleanData.password
         })
 
         if (error) {
-            redirect('/error')
+            return NextResponse.json({
+                message: error.message
+            }, {
+                status: 400
+            })
         }
 
-        revalidatePath('/', 'layout')
-        redirect('/dashboard')
+        return NextResponse.json({
+            message: "Login successful!"
+        }, {
+            status: 200
+        })
     } catch (e) {
         if (e instanceof z.ZodError) {
-            console.log('Validation failed:', e.errors);
+            return NextResponse.json({
+                message: e.errors[0].message
+            }, {
+                status: 400
+            })
         }
     }
 }

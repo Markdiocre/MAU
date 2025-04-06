@@ -4,20 +4,21 @@ import Navbar from '@/components/Navbar';
 
 interface AuthFormProps {
     title: string;
-    formAction: (formData: FormData) => Promise<void>;
+    formAction: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+    errors? : string
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({ title, formAction }) => {
+const AuthForm: React.FC<AuthFormProps> = ({ title, formAction, errors }) => {
     const router = useRouter()
 
     return (
         <div>
             <Navbar />
-
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <h1 className="title text-4xl font-bold mb-2 ">MA, ANO ULAM?</h1>
                 <h1 className="text-1xl mb-1 ">{title}</h1>
-                <form className="flex flex-col space-y-4 mb-4 min-w-[300px]">
+                {errors && <p className="text-red-400">{errors}</p>}
+                <form className="flex flex-col space-y-4 mb-4 min-w-[300px]" onSubmit={formAction}>
                     <div className="flex flex-col">
                         <label htmlFor="email">Email:</label>
                         <input id="email" name="email" type="email" required className="p-2 rounded bg-white border-green-700 border-2" />
@@ -26,7 +27,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, formAction }) => {
                         <label htmlFor="password">Password:</label>
                         <input id="password" name="password" type="password" required className="p-2 rounded bg-white border-green-700 border-2" />
                     </div>
-                    <button type="submit" formAction={formAction} className="button text-white p-2 rounded cursor-pointer font-bold">
+                    <button type="submit" className="button text-white p-2 rounded cursor-pointer font-bold">
                         {title}
                     </button>
                 </form>
