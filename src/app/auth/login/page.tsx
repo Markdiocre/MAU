@@ -24,7 +24,7 @@ export default function Login() {
     }).then((res)=>{
       alert(res.data.message)
       router.refresh() // to revalidate layout
-      router.push('/dashboard')
+      router.replace('/dashboard')
     }).catch((err)=>{
       alert(err.response.data.message)
       setErrors(err.response.data.message)
