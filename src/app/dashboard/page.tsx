@@ -86,6 +86,7 @@ export default function Dashboard() {
             url: '/auth/logout',
             method: 'POST',
         }).then(() => {
+            router.refresh()
             router.push('/')
         }).catch((err)=>{
             console.log(err)
