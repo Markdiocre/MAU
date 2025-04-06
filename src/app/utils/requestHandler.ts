@@ -10,9 +10,9 @@ const DEPLOY = true
 let BASE_URL
 
 if(DEPLOY){
-    BASE_URL = "http://localhost:3000/api"
+    BASE_URL = "https://ma-ano-ulam.vercel.app/api"
 }else{
-    BASE_URL = "http://192.168.18.6:3000/api"
+    BASE_URL = "http://localhost:3000/api"
 }
 
 
