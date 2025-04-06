@@ -1,11 +1,12 @@
 "use client"
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { requestHandler } from "@/app/utils/requestHandler";
 import { useRouter } from "next/navigation";
 import MarkdownIt from 'markdown-it';
 import Prompt from "@/components/Prompt"
 import "./page.css"
+import manualProtect from "../utils/supabase/protection";
 
 
 export default function Dashboard() {
@@ -21,6 +22,11 @@ export default function Dashboard() {
 
     const router = useRouter()
     const md = new MarkdownIt()
+
+    useEffect(()=>{
+        manualProtect()
+    },[])
+
 
     const handleInputChange = (index: number, value: string) => {
         const newItems = [...items];
@@ -48,9 +54,8 @@ export default function Dashboard() {
             .join(', ');
     };
 
-    const handlePromptSubmit = (e : FormEvent<HTMLFormElement>) => {
+    const handlePromptSubmit = async (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log("Running")
 
         setActive(true)
         setLoading(true)
@@ -58,7 +63,7 @@ export default function Dashboard() {
 
         const ingredients: string = getCleanItemsString()
 
-        requestHandler({
+        await requestHandler({
             url: '/ingredients',
             method: 'POST',
             body: {
