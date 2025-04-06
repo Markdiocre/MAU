@@ -41,6 +41,8 @@ export async function signup(formData: FormData) {
     redirect('/error')
   }
 
+
+  alert("A confirmation link has been sent to your email. Please confirm it to successfully register your account")
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/auth/login')
 }
