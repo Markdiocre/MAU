@@ -6,7 +6,7 @@ interface IRequest{
     body?: object
 }
 
-const DEPLOY = true
+const DEPLOY = false
 let BASE_URL
 
 if(DEPLOY){

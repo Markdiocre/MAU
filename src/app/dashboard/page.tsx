@@ -78,10 +78,6 @@ export default function Dashboard() {
             setLoading(false)
             setActive(false)
 
-            if(err.status == 403){
-                return alert("You reached your limit of prompts for today")
-            }
-
             alert(err)
         })
     }
@@ -106,7 +102,7 @@ export default function Dashboard() {
                 {!active &&
                     <>
                     <nav className="fixed w-full flex justify-end px-3 sm:py-5 py-2 ">
-                        <button type="button" onClick={() => handleLogout()} className="cursor-pointer font-bold px-5 py-2 bg-green-500">LOGOUT</button>
+                        {/* <button type="button" onClick={() => handleLogout()} className="cursor-pointer font-bold px-5 py-2 bg-green-500">LOGOUT</button> */}
                     </nav>
                     <form onSubmit={(e) => handlePromptSubmit(e)} className="sm:max-w-[640px] w-full px-4 my-10">
                         <p className="font-bold text-lg text-left">Anong ingredients meron ka ngayon? Pakilista</p>
