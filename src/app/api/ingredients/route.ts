@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generatePrompt } from "@/service/gptService";
-import { supabase } from "@/utils/supabase/server";
 
 export async function POST(req: NextRequest){
     const startOfToday = new Date()

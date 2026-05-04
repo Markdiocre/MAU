@@ -1,12 +1,10 @@
 "use client"
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { requestHandler } from "@/app/utils/requestHandler";
-import { useRouter } from "next/navigation";
 import MarkdownIt from 'markdown-it';
 import Prompt from "@/components/Prompt"
 import "./page.css"
-import manualProtect from "../utils/supabase/protection";
 
 
 export default function Dashboard() {
@@ -20,12 +18,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(false)
     const [output, setOutput] = useState('')
 
-    const router = useRouter()
     const md = new MarkdownIt()
-
-    useEffect(()=>{
-        manualProtect()
-    },[])
 
 
     const handleInputChange = (index: number, value: string) => {
@@ -82,17 +75,6 @@ export default function Dashboard() {
         })
     }
 
-    const handleLogout = async () => {
-        await requestHandler({
-            url: '/auth/logout',
-            method: 'POST',
-        }).then(() => {
-            router.refresh()
-            router.replace('/')
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }
     return (
         <>
             <div className="flex justify-center h-full min-h-screen ">
